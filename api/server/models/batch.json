@@ -1,0 +1,30 @@
+{
+  "name": "Batch",
+  "base": "PersistedModel",
+  "properties": {
+    "rank": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "number",
+      "required": true
+    },
+    "materialCostImport": {
+      "type": "number",
+      "default": 0
+    },
+    "labourCostImport": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

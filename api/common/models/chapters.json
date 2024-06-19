@@ -1,0 +1,28 @@
+{
+  "name": "Chapters",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "rank": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "totalcost": {
+      "type": "number",
+      "required": true
+    },
+    "totalsale": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

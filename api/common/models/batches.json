@@ -1,0 +1,45 @@
+{
+  "name": "Batches",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "rank": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "mount": {
+      "type": "number",
+      "required": true
+    },
+    "materialcost": {
+      "type": "number",
+      "required": true
+    },
+    "labourcost": {
+      "type": "number",
+      "required": true
+    },
+    "totalcost": {
+      "type": "number",
+      "required": true
+    },
+    "unitarycost": {
+      "type": "number",
+      "required": true
+    },
+    "totalsale": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

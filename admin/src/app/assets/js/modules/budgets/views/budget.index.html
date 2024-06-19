@@ -1,0 +1,82 @@
+<div>
+    <h2>Budgets</h2>
+    <!-- Filtros -->
+    <div>
+      <input type="text" ng-model="vm.filter.name" placeholder="Filter by Name">
+      <input type="text" ng-model="vm.filter.clientName" placeholder="Filter by Client Name">
+      <input type="date" ng-model="vm.filter.startDate">
+      <input type="date" ng-model="vm.filter.endDate">
+      <button ng-click="vm.applyFilters()">Apply Filters</button>
+    </div>
+    <!-- Lista de presupuestos -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Thumbnail</th>
+          <th>Date</th>
+          <th>Client Name</th>
+          <th>Total Cost Import</th>
+          <th>Total Sale Import</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="budget in vm.budgets">
+          <td>{{ budget.name }}</td>
+          <td><img ng-src="{{ budget.thumbnail }}" style="width: 50px; height: auto;"></td>
+          <td>{{ budget.date | date }}</td>
+          <td>{{ budget.clientName }}</td>
+          <td>{{ budget.totalCostImport }}</td>
+          <td>{{ budget.totalSaleImport }}</td>
+          <td>
+            <a ui-sref="budgetDetail({ id: budget.id })">Edit</a>
+            <a ng-click="vm.deleteBudget(budget)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Formulario para añadir un nuevo presupuesto -->
+    <div>
+      <h3>Add New Budget</h3>
+      <form ng-submit="vm.addBudget()">
+        <input type="text" ng-model="vm.newBudget.name" placeholder="Name" required>
+        <input type="text" ng-model="vm.newBudget.thumbnail" placeholder="Thumbnail URL">
+        <input type="date" ng-model="vm.newBudget.date" required>
+        <input type="text" ng-model="vm.newBudget.clientName" placeholder="Client Name" required>
+        <button type="submit">Add Budget</button>
+      </form>
+    </div>
+  </div>
+  
+  <div>
+    <h1>Budgets</h1>
+    <button ng-click="vm.addBudget()">Add Budget</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Thumbnail</th>
+          <th>Date</th>
+          <th>Client Name</th>
+          <th>Total Cost</th>
+          <th>Total Sale</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="budget in vm.budgets">
+          <td>{{ budget.name }}</td>
+          <td><img ng-src="{{ budget.thumbnail }}" alt="Thumbnail" width="50"></td>
+          <td>{{ budget.date | date }}</td>
+          <td>{{ budget.clientName }}</td>
+          <td>{{ budget.totalCost }}</td>
+          <td>{{ budget.totalSale }}</td>
+          <td>
+            <button ng-click="vm.editBudget(budget.id)">Edit</button>
+            <button ng-click="vm.deleteBudget(budget.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
