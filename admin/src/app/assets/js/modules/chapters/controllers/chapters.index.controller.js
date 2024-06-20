@@ -1,6 +1,7 @@
 export default class ChaptersController {
-    constructor($http, $rootScope) {
+    constructor($http, $state, $rootScope) {
       this.$http = $http;
+      this.$state = $state;
       this.$rootScope = $rootScope;
       this.budgetId = this.$rootScope.budgetId;
       this.chapters = [];
@@ -15,7 +16,6 @@ export default class ChaptersController {
   
     getChapters() {
         this.budgetId = this.$rootScope.budgetId;
-        console.log(this.budgetId);
         this.$http.get(`http://localhost:3000/api/budgets/${this.budgetId}/chapters`).then(response => {
           this.chapters = response.data;
         }).catch(error => {
@@ -37,27 +37,31 @@ export default class ChaptersController {
         });
       }
   
-    updateChapter(chapter) {
-      this.$http.put(`http://localhost:3000/api/budgets/${this.budgetId}/chapters/${chapter.id}`, chapter).then(() => {
-        chapter.editMode = false;
-      }).catch(error => {
-        console.error('Error updating chapter:', error);
-      });
+      updateChapter(chapter) {
+        this.$rootScope.chapterId = chapter.id;
+        this.$http.put(`http://localhost:3000/api/budgets/${this.budgetId}/chapters/${chapter.id}`, chapter).then(() => {
+            chapter.editMode = false;
+        }).catch(error => {
+            console.error('Error updating chapter:', error);
+        });
     }
   
     deleteChapter(id) {
-      this.$http.delete(`http://localhost:3000/api/budgets/${this.budgetId}/chapters/${id}`).then(() => {
-        this.chapters = this.chapters.filter(chapter => chapter.id !== id);
-      }).catch(error => {
-        console.error('Error deleting chapter:', error);
-      });
+        const chapter = this.chapters.find(ch => ch.id === id);
+        if (chapter) {
+            this.$rootScope.chapterId = chapter.id;
+            this.$http.delete(`http://localhost:3000/api/budgets/${this.budgetId}/chapters/${id}`).then(() => {
+                this.chapters = this.chapters.filter(chapter => chapter.id !== id);
+            }).catch(error => {
+                console.error('Error deleting chapter:', error);
+            });
+        }
     }
-    // admin/src/app/assets/js/modules/chapters/controllers/chapters.index.controller.js
-viewBatches(chapter) {
-    this.$rootScope.chapterId = chapter.id;
-    this.$state.go('batches', { chapterId: chapter.id });
-  }
-
+      
+    viewBatches(chapter) {
+        this.$rootScope.chapterId = chapter.id;
+        this.$state.go('batches', { budgetId: this.$rootScope.budgetId, chapterId: this.$rootScope.chapterId });
+    }
 }
 
   

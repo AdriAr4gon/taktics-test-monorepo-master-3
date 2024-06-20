@@ -4,7 +4,7 @@ import BatchesController from './controllers/batches.index.controller.js';
 
 function routeConfig($stateProvider) {
     $stateProvider.state('batches', {
-      url: '/home/batches/:batchId',
+    url: '/home/chapters/:chapterId/batches',
       templateUrl: batchesUrl,
       controller: BatchesController,
       controllerAs: 'vm',

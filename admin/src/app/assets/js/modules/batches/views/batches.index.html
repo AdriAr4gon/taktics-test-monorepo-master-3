@@ -9,36 +9,71 @@
 <body>
   <div>
     <h2>Lotes</h2>
-    <!-- Formulario para añadir un nuevo lote -->
     <div>
-      <h3>Añadir nuevo lote</h3>
-      <form ng-submit="vm.addBatch()">
-        <label for="description">Descripción:</label><br>
-        <input type="text" id="description" name="description" ng-model="vm.newBatch.description"><br>
-        <label for="totalCost">Coste total:</label><br>
-        <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newBatch.totalcost"><br>
-        <label for="totalSale">Costo de venta:</label><br>
-        <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newBatch.totalsale"><br>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+        <h3>Añadir nuevo lote</h3>
+        <form ng-submit="vm.addBatch()">
+          <label for="rank">Rango:</label><br>
+          <input type="number" id="rank" name="rank" ng-model="vm.newBatch.rank"><br>
+          <label for="description">Descripción:</label><br>
+          <input type="text" id="description" name="description" ng-model="vm.newBatch.description"><br>
+          <label for="mount">Montaje:</label><br>
+          <input type="number" id="mount" name="mount" ng-model="vm.newBatch.mount"><br>
+          <label for="materialcost">Costo de material:</label><br>
+          <input type="number" id="materialcost" name="materialcost" ng-model="vm.newBatch.materialcost"><br>
+          <label for="labourcost">Costo de mano de obra:</label><br>
+          <input type="number" id="labourcost" name="labourcost" ng-model="vm.newBatch.labourcost"><br>
+          <label for="totalcost">Costo total:</label><br>
+          <input type="number" id="totalcost" name="totalcost" ng-model="vm.newBatch.totalcost"><br>
+          <label for="unitarycost">Costo unitario:</label><br>
+          <input type="number" id="unitarycost" name="unitarycost" ng-model="vm.newBatch.unitarycost"><br>
+          <label for="totalsale">Venta total:</label><br>
+          <input type="number" id="totalsale" name="totalsale" ng-model="vm.newBatch.totalsale"><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
     <div class="table-responsive">
       <table>
         <thead>
           <tr>
+            <th>Rango</th>
             <th>Descripción</th>
+            <th>Monto</th>
+            <th>Coste material</th>
+            <th>Coste laboral</th>
+            <th>Coste unitario</th>
             <th>Coste total</th>
-            <th>Costo de venta</th>
-            <th>Acciones</th>
+            <th>Coste venta</th>
+            
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="batch in vm.batches">
-            <td>{{ batch.description }}</td>
-            <td>{{ batch.totalcost }}</td>
-            <td>{{ batch.totalsale }}</td>
+            <td ng-hide="batch.editMode">{{ batch.rank }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.rank"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.description }}</td>
+            <td ng-show="batch.editMode"><input type="text" ng-model="batch.description"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.mount }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.mount"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.materialcost }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.materialcost"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.labourcost }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.labourcost"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.unitarycost }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.unitarycost"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.totalcost }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.totalcost"></td>
+            
+            <td ng-hide="batch.editMode">{{ batch.totalsale }}</td>
+            <td ng-show="batch.editMode"><input type="number" ng-model="batch.totalsale"></td>
             <td>
-              <button ng-click="vm.updateBatch(batch); batch.editMode = false">Guardar</button>
+                <button ng-show="batch.editMode" ng-click="vm.updateBatch(batch); batch.editMode = false">Guardar</button>
+                <button ng-click="vm.editBatch(batch)">Editar</button>
               <button ng-click="vm.deleteBatch(batch.id)">Eliminar</button>
             </td>
           </tr>

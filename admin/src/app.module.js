@@ -23,6 +23,7 @@ import users from './app/assets/js/modules/users/app.users';
 import BudgetController from './app/assets/js/modules/budgets/controllers/budget.index.controller';
 import budgets from './app/assets/js/modules/budgets/budgets';
 import chapters from './app/assets/js/modules/chapters/chapters';
+import batches from './app/assets/js/modules/batches/batches';
 
 angular
   .module('app', [
@@ -46,12 +47,12 @@ angular
     users,
     budgets,
     chapters,
+    batches,
   ])
   .controller('MainController', MainController)
   .config(routeConfig);
 
 function routeConfig($stateProvider) {
-  // La configuración de la ruta para 'home.budgets' debería estar en budgets.js
 }
 
 routeConfig.$inject = ['$stateProvider'];
