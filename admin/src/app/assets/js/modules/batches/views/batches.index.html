@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batches - Eureka</title>
+  <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div>
+    <h2>Lotes</h2>
+    <!-- Formulario para añadir un nuevo lote -->
+    <div>
+      <h3>Añadir nuevo lote</h3>
+      <form ng-submit="vm.addBatch()">
+        <label for="description">Descripción:</label><br>
+        <input type="text" id="description" name="description" ng-model="vm.newBatch.description"><br>
+        <label for="totalCost">Coste total:</label><br>
+        <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newBatch.totalcost"><br>
+        <label for="totalSale">Costo de venta:</label><br>
+        <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newBatch.totalsale"><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Coste total</th>
+            <th>Costo de venta</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="batch in vm.batches">
+            <td>{{ batch.description }}</td>
+            <td>{{ batch.totalcost }}</td>
+            <td>{{ batch.totalsale }}</td>
+            <td>
+              <button ng-click="vm.updateBatch(batch); batch.editMode = false">Guardar</button>
+              <button ng-click="vm.deleteBatch(batch.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

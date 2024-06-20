@@ -1,15 +1,18 @@
 export default class BudgetController {
-  constructor($http) {
+  constructor($http, $state, $rootScope) {     // Asegúrate de inyectar $state aquí
     this.$http = $http;
+    this.$state = $state;
+    this.$rootScope = $rootScope;
     this.budgets = [];
     this.newBudget = {
+      budgetId: '',
       name: '',
       thumbnail: '',
       date: null,
       clientname: '',
       totalcost: 0,
       totalsale: 0,
-      chapters: []
+      chapters: [],
     };
 
     this.getBudgets();
@@ -21,7 +24,11 @@ export default class BudgetController {
     }).catch(error => {
       console.error('Error fetching budgets:', error);
     });
+    this.budgets.forEach(budget => {
+      console.log(budget.id);
+    });
   }
+  
 
   addBudget() {
     this.$http.post('http://localhost:3000/api/budgets', this.newBudget).then(response => {
@@ -49,6 +56,11 @@ export default class BudgetController {
     });
   }
 
+  viewChapters(budget) {
+    this.$rootScope.budgetId = budget.id;
+    this.$state.go('chapters', { budgetId: budget.id });
+  }
+
   deleteBudget(id) {
     this.$http.delete(`http://localhost:3000/api/budgets/${id}`).then(() => {
       this.budgets = this.budgets.filter(budget => budget.id !== id);
@@ -57,3 +69,4 @@ export default class BudgetController {
     });
   }
 }
+

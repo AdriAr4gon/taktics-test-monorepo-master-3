@@ -22,6 +22,7 @@ import dashboard from './app/assets/js/modules/dashboard/app.dashboard';
 import users from './app/assets/js/modules/users/app.users';
 import BudgetController from './app/assets/js/modules/budgets/controllers/budget.index.controller';
 import budgets from './app/assets/js/modules/budgets/budgets';
+import chapters from './app/assets/js/modules/chapters/chapters';
 
 angular
   .module('app', [
@@ -43,7 +44,8 @@ angular
     sessions,
     dashboard,
     users,
-    budgets, // Agrega el módulo budgets aquí
+    budgets,
+    chapters,
   ])
   .controller('MainController', MainController)
   .config(routeConfig);

@@ -31,7 +31,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "chapters": {
+      "type": "hasMany",
+      "model": "Chapters",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -22,7 +22,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "batches": {
+      "type": "hasMany",
+      "model": "Batches",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

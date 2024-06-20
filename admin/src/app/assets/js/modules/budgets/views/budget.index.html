@@ -36,6 +36,7 @@
     <table>
       <thead>
         <tr>
+          <th>ID</th>
           <th>Nombre</th>
           <th>Foto</th>
           <th>Fecha</th>
@@ -47,16 +48,20 @@
       </thead>
       <tbody>
         <tr ng-repeat="budget in vm.budgets">
+          <td>{{ budget.id }}</td>
           <td ng-hide="budget.editMode">{{ budget.name }}</td>
           <td ng-hide="budget.editMode"><img ng-src="{{ budget.thumbnail }}" alt="Thumbnail" width="50"></td>
           <td ng-hide="budget.editMode">{{ budget.date | date }}</td>
           <td ng-hide="budget.editMode">{{ budget.clientname }}</td>
           <td ng-hide="budget.editMode">{{ budget.totalcost }}</td>
           <td ng-hide="budget.editMode">{{ budget.totalsale }}</td>
-          <td ng-hide="budget.editMode">
-            <button ng-click="budget.editMode = true">Edit</button>
-            <button ng-click="vm.deleteBudget(budget.id)">Delete</button>
-          </td>
+  
+            <td ng-hide="budget.editMode">
+              <button ng-click="budget.editMode = true">Edit</button>
+              <button ng-click="vm.deleteBudget(budget.id)">Delete</button>
+              <button ng-click="vm.viewChapters(budget)">Ver Capítulos</button>
+            </td>
+          
           <td ng-show="budget.editMode"><input type="text" ng-model="budget.name"></td>
           <td ng-show="budget.editMode"><input type="text" ng-model="budget.thumbnail"></td>
           <td ng-show="budget.editMode"><input type="text" ng-model="budget.date"></td>
