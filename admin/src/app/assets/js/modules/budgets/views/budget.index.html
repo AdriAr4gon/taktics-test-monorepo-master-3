@@ -1,82 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budgets - Eureka</title>
+  <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div>
+    <h2>Presupuestos</h2>
+
+  <!-- Formulario para añadir un nuevo presupuesto -->
 <div>
-    <h2>Budgets</h2>
-    <!-- Filtros -->
-    <div>
-      <input type="text" ng-model="vm.filter.name" placeholder="Filter by Name">
-      <input type="text" ng-model="vm.filter.clientName" placeholder="Filter by Client Name">
-      <input type="date" ng-model="vm.filter.startDate">
-      <input type="date" ng-model="vm.filter.endDate">
-      <button ng-click="vm.applyFilters()">Apply Filters</button>
-    </div>
-    <!-- Lista de presupuestos -->
+  <h3>Añadir nuevo presupuesto</h3>
+  <form ng-submit="vm.addBudget()">
+    <label for="name">Nombre:</label><br>
+    <input type="text" id="name" name="name" ng-model="vm.newBudget.name"><br>
+    <label for="thumbnail">Foto:</label><br>
+    <input type="text" id="thumbnail" name="thumbnail" value="http://placehold.it/50x50" ng-model="vm.newBudget.thumbnail"><br>
+    <label for="date">Fecha:</label><br>
+    <input type="date" id="date" name="date" value="" ng-model="vm.newBudget.date"><br>
+    <label for="clientName">Nombre del cliente:</label><br>
+    <input type="text" id="clientName" name="clientName" value="New Client" ng-model="vm.newBudget.clientname"><br>
+    <label for="totalCost">Coste total:</label><br>
+    <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newBudget.totalcost"><br>
+    <label for="totalSale">Costo de venta:</label><br>
+    <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newBudget.totalsale"><br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+  
+  <div>
+    <h1>Presupuestos</h1>
+    <div class="table-responsive">
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Thumbnail</th>
-          <th>Date</th>
-          <th>Client Name</th>
-          <th>Total Cost Import</th>
-          <th>Total Sale Import</th>
-          <th>Actions</th>
+          <th>Nombre</th>
+          <th>Foto</th>
+          <th>Fecha</th>
+          <th>Nombre de Cliente</th>
+          <th>Coste total</th>
+          <th>Costo de venta</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="budget in vm.budgets">
-          <td>{{ budget.name }}</td>
-          <td><img ng-src="{{ budget.thumbnail }}" style="width: 50px; height: auto;"></td>
-          <td>{{ budget.date | date }}</td>
-          <td>{{ budget.clientName }}</td>
-          <td>{{ budget.totalCostImport }}</td>
-          <td>{{ budget.totalSaleImport }}</td>
-          <td>
-            <a ui-sref="budgetDetail({ id: budget.id })">Edit</a>
-            <a ng-click="vm.deleteBudget(budget)">Delete</a>
+          <td ng-hide="budget.editMode">{{ budget.name }}</td>
+          <td ng-hide="budget.editMode"><img ng-src="{{ budget.thumbnail }}" alt="Thumbnail" width="50"></td>
+          <td ng-hide="budget.editMode">{{ budget.date | date }}</td>
+          <td ng-hide="budget.editMode">{{ budget.clientname }}</td>
+          <td ng-hide="budget.editMode">{{ budget.totalcost }}</td>
+          <td ng-hide="budget.editMode">{{ budget.totalsale }}</td>
+          <td ng-hide="budget.editMode">
+            <button ng-click="budget.editMode = true">Edit</button>
+            <button ng-click="vm.deleteBudget(budget.id)">Delete</button>
+          </td>
+          <td ng-show="budget.editMode"><input type="text" ng-model="budget.name"></td>
+          <td ng-show="budget.editMode"><input type="text" ng-model="budget.thumbnail"></td>
+          <td ng-show="budget.editMode"><input type="text" ng-model="budget.date"></td>
+          <td ng-show="budget.editMode"><input type="text" ng-model="budget.clientname"></td>
+          <td ng-show="budget.editMode"><input type="text" ng-model="budget.totalcost"></td>
+          <td ng-show="budget.editMode"><input type="text" ng-model="budget.totalsale"></td>
+          <td ng-show="budget.editMode">
+            <button ng-click="vm.updateBudget(budget); budget.editMode = false">Guardar</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <!-- Formulario para añadir un nuevo presupuesto -->
-    <div>
-      <h3>Add New Budget</h3>
-      <form ng-submit="vm.addBudget()">
-        <input type="text" ng-model="vm.newBudget.name" placeholder="Name" required>
-        <input type="text" ng-model="vm.newBudget.thumbnail" placeholder="Thumbnail URL">
-        <input type="date" ng-model="vm.newBudget.date" required>
-        <input type="text" ng-model="vm.newBudget.clientName" placeholder="Client Name" required>
-        <button type="submit">Add Budget</button>
-      </form>
     </div>
   </div>
   
-  <div>
-    <h1>Budgets</h1>
-    <button ng-click="vm.addBudget()">Add Budget</button>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Thumbnail</th>
-          <th>Date</th>
-          <th>Client Name</th>
-          <th>Total Cost</th>
-          <th>Total Sale</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="budget in vm.budgets">
-          <td>{{ budget.name }}</td>
-          <td><img ng-src="{{ budget.thumbnail }}" alt="Thumbnail" width="50"></td>
-          <td>{{ budget.date | date }}</td>
-          <td>{{ budget.clientName }}</td>
-          <td>{{ budget.totalCost }}</td>
-          <td>{{ budget.totalSale }}</td>
-          <td>
-            <button ng-click="vm.editBudget(budget.id)">Edit</button>
-            <button ng-click="vm.deleteBudget(budget.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+</body>
+</html>
+
