@@ -4,33 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapters - Eureka</title>
-  <link rel="stylesheet" href="/admin/src/app/assets/css/sass/custom/general2.scss">
+  <link rel="stylesheet" href="/admin/src/app/assets/css/sass/bootstrap-overrides.scss">
 </head>
 <body>
   <div>
-    <h2>Capítulos</h2>
+    
+    <h2 class="page-header">Capítulos</h2>
     <!-- Formulario para añadir un nuevo capítulo -->
-    <div>
-      <h3 class="custom-margin">Añadir nuevo capítulo</h3>
+    <div class="">
+      <h3 class="page-header">Añadir nuevo capítulo</h3>
       <form ng-submit="vm.addChapter()">
+        <div class="form-group form-group-presupuestos"> 
+          <div class="form-control">
         <label for="description">Descripción:</label><br>
-        <input type="text" id="description" name="description" ng-model="vm.newChapter.description"><br>
+        <input type="text" id="description" name="description" ng-model="vm.newChapter.description" class="form-control"><br>
+      </div> 
+      <div class="form-control">
         <label for="totalCost">Coste total:</label><br>
-        <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newChapter.totalcost"><br>
+        <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newChapter.totalcost" class="form-control"><br>
+      </div>
+      <div class="form-control">
         <label for="totalSale">Costo de venta:</label><br>
-        <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newChapter.totalsale"><br>
-        <input type="submit" value="Añadir">
+        <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newChapter.totalsale" class="form-control"><br>
+      </div>
+      <div class="form-control">
+        <input type="submit" value="Añadir" class="btn btn-primary">
+      </div>
+        </div>
       </form>
+      </div>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-report-fusion">
       <table>
         <thead>
           <tr>
-            <th><button ng-click="vm.sortChapters('description')">Descripción</button></th>
-            <th><button ng-click="vm.sortChapters('totalcost')">Coste total</button></th>
-            <th><button ng-click="vm.sortChapters('totalsale')">Costo de venta</button></th>
-            <th>Acciones</th>
+            <th><button ng-click="vm.sortChapters('description')" class="btn">Descripción</button></th>
+            <th><button ng-click="vm.sortChapters('totalcost')" class="btn">Coste total</button></th>
+            <th><button ng-click="vm.sortChapters('totalsale')" class="btn">Costo de venta</button></th>
+            <th class="btn">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -44,10 +56,10 @@
             <td ng-hide="chapter.editMode">{{ chapter.totalsale }}</td>
             <td ng-show="chapter.editMode"><input type="number" ng-model="chapter.totalsale"></td>
             <td>
-              <button ng-show="!chapter.editMode" ng-click="chapter.editMode = true">Editar</button>
-              <button ng-show="chapter.editMode" ng-click="vm.updateChapter(chapter); chapter.editMode = false">Guardar</button>
-              <button ng-click="vm.deleteChapter(chapter.id)">Eliminar</button>
-              <button ng-click="vm.viewBatches(chapter)">Ver Partidas</button>
+              <button ng-show="!chapter.editMode" ng-click="chapter.editMode = true" class="btn">Editar</button>
+              <button ng-show="chapter.editMode" ng-click="vm.updateChapter(chapter); chapter.editMode = false" class="btn">Guardar</button>
+              <button ng-click="vm.deleteChapter(chapter.id)" class="btn">Eliminar</button>
+              <button ng-click="vm.viewBatches(chapter)" class="btn">Ver Partidas</button>
             </td>
           </tr>
         </tbody>

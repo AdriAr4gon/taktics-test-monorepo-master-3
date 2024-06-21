@@ -7,42 +7,62 @@
   <link rel="stylesheet" href="../../../../css/style.css">
 </head>
 <body>
-  <div>
-    <h2>Partidas</h2>
-    <div>
-        <h3>Añadir nueva partida</h3>
+    <h2 class="page-header">Partidas</h2>
+        <h3 class="page-header">Añadir nueva partida</h3>
+        
         <form ng-submit="vm.addBatch()">
+          <div class="form-group form-group-presupuestos"> 
+        <div class="form-control">
           <label for="rank">Rango:</label><br>
-          <input type="number" id="rank" name="rank" ng-model="vm.newBatch.rank"><br>
+          <input type="number" id="rank" name="rank" ng-model="vm.newBatch.rank" class="form-control"><br>
+          </div>
+          <div class="form-control">
           <label for="description">Descripción:</label><br>
-          <input type="text" id="description" name="description" ng-model="vm.newBatch.description"><br>
+          <input type="text" id="description" name="description" ng-model="vm.newBatch.description" class="form-control"><br>
+        </div>
+        <div class="form-control">
           <label for="mount">Montaje:</label><br>
-          <input type="number" id="mount" name="mount" ng-model="vm.newBatch.mount"><br>
+          <input type="number" id="mount" name="mount" ng-model="vm.newBatch.mount" class="form-control"><br>
+        </div>
+        <div class="form-control">
           <label for="materialcost">Costo de material:</label><br>
-          <input type="number" id="materialcost" name="materialcost" ng-model="vm.newBatch.materialcost"><br>
+          <input type="number" id="materialcost" name="materialcost" ng-model="vm.newBatch.materialcost" class="form-control"><br>
+        </div>
+        <div class="form-control">
           <label for="labourcost">Costo de mano de obra:</label><br>
-          <input type="number" id="labourcost" name="labourcost" ng-model="vm.newBatch.labourcost"><br>
+          <input type="number" id="labourcost" name="labourcost" ng-model="vm.newBatch.labourcost" class="form-control"><br>
+        </div>
+        <div class="form-control">
           <label for="totalcost">Costo total:</label><br>
-          <input type="number" id="totalcost" name="totalcost" ng-model="vm.newBatch.totalcost"><br>
+          <input type="number" id="totalcost" name="totalcost" ng-model="vm.newBatch.totalcost" class="form-control"><br>
+        </div>
+        <div class="form-control">
           <label for="unitarycost">Costo unitario:</label><br>
-          <input type="number" id="unitarycost" name="unitarycost" ng-model="vm.newBatch.unitarycost"><br>
+          <input type="number" id="unitarycost" name="unitarycost" ng-model="vm.newBatch.unitarycost" class="form-control"><br>
+        </div>
+        <div class="form-control">
           <label for="totalsale">Venta total:</label><br>
-          <input type="number" id="totalsale" name="totalsale" ng-model="vm.newBatch.totalsale"><br>
-          <input type="submit" value="Añadir">
+          <input type="number" id="totalsale" name="totalsale" ng-model="vm.newBatch.totalsale" class="form-control"><br>
+        </div>
+        <div class="form-control">
+          <input type="submit" value="Añadir" class="btn btn-primary">
+        </div>
+        </div>
+      </div>
         </form>
       </div>
-    <div class="table-responsive">
+    <div class="table-report-fusion">
       <table>
         <thead>
           <tr>
-            <th><button ng-click="vm.sortBatches('rank')">Rango</button></th>
-            <th><button ng-click="vm.sortBatches('description')">Descripción</button></th>
-            <th><button ng-click="vm.sortBatches('mount')">Monto</button></th>
-            <th><button ng-click="vm.sortBatches('materialcost')">Coste material</button></th>
-            <th><button ng-click="vm.sortBatches('labourcost')">Coste laboral</button></th>
-            <th><button ng-click="vm.sortBatches('unitarycost')">Coste unitario</button></th>
-            <th><button ng-click="vm.sortBatches('totalcost')">Coste total</button></th>
-            <th><button ng-click="vm.sortBatches('totalsale')">Coste venta</button></th>
+            <th><button ng-click="vm.sortBatches('rank')" class="btn">Rango</button></th>
+            <th><button ng-click="vm.sortBatches('description')" class="btn">Descripción</button></th>
+            <th><button ng-click="vm.sortBatches('mount')" class="btn">Monto</button></th>
+            <th><button ng-click="vm.sortBatches('materialcost')" class="btn">Coste material</button></th>
+            <th><button ng-click="vm.sortBatches('labourcost')" class="btn">Coste laboral</button></th>
+            <th><button ng-click="vm.sortBatches('unitarycost')" class="btn">Coste unitario</button></th>
+            <th><button ng-click="vm.sortBatches('totalcost')" class="btn">Coste total</button></th>
+            <th><button ng-click="vm.sortBatches('totalsale')" class="btn">Coste venta</button></th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +99,5 @@
         </tbody>
       </table>
     </div>
-  </div>
 </body>
 </html>
