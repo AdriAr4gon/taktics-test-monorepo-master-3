@@ -12,11 +12,12 @@ Abre el repositorio del proyecto desde tu Visual Studio Code.
 
 ## Ejecución de la aplicación
 
-Para arrancar la aplicación, necesitas construir y ejecutar los contenedores de Docker. Debes abrir desde la raíz del proyecto una terminal en tu visual studio code y ejecutar el siguiente comando:
+Para arrancar la aplicación, necesitas construir y ejecutar los contenedores de Docker. Debes abrir desde la raíz del proyecto una terminal en tu visual studio code y ejecutar los siguientes comandos:
 
-docker-compose up --build
+1. docker-compose build
+2. docker-compose up
 
-Este comando construirá las imágenes de Docker para el frontend y el backend (según lo definido en docker-compose.yml y los archivos Dockerfile en los directorios admin/ y api/), y luego ejecutará los contenedores.
+Estos comandos construirán las imágenes de Docker para el frontend y el backend (según lo definido en docker-compose.yml y los archivos Dockerfile en los directorios admin/ y api/), y luego ejecutará los contenedores.
 
 El frontend estará disponible en http://localhost:9000 y el backend en http://localhost:3000
 
