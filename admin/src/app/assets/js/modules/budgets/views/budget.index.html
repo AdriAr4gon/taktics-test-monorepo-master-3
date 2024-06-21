@@ -26,7 +26,7 @@
     <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newBudget.totalcost"><br>
     <label for="totalSale">Costo de venta:</label><br>
     <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newBudget.totalsale"><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Añadir">
   </form>
 </div>
   
@@ -36,13 +36,13 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Foto</th>
-          <th>Fecha</th>
-          <th>Nombre de Cliente</th>
-          <th>Coste total</th>
-          <th>Costo de venta</th>
+          <th><button ng-click="vm.sortBudgets('id')">ID</button></th>      
+          <th><button ng-click="vm.sortBudgets('name')">Nombre</button></th>
+          <th><button>Foto</button></th>
+          <th><button ng-click="vm.sortBudgets('date')">Fecha</button></th>
+          <th><button ng-click="vm.sortBudgets('clientname')">Nombre de Cliente</button></th>
+          <th><button ng-click="vm.sortBudgets('totalcost')">Coste total</button></th>
+          <th><button ng-click="vm.sortBudgets('totalsale')">Costo de venta</button></th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -57,8 +57,8 @@
           <td ng-hide="budget.editMode">{{ budget.totalsale }}</td>
   
             <td ng-hide="budget.editMode">
-              <button ng-click="budget.editMode = true">Edit</button>
-              <button ng-click="vm.deleteBudget(budget.id)">Delete</button>
+              <button ng-click="budget.editMode = true">Editar</button>
+              <button ng-click="vm.deleteBudget(budget.id)">Eliminar</button>
               <button ng-click="vm.viewChapters(budget)">Ver Capítulos</button>
             </td>
           

@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapters - Eureka</title>
-  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="/admin/src/app/assets/css/sass/custom/general2.scss">
 </head>
 <body>
   <div>
     <h2>Capítulos</h2>
     <!-- Formulario para añadir un nuevo capítulo -->
     <div>
-      <h3>Añadir nuevo capítulo</h3>
+      <h3 class="custom-margin">Añadir nuevo capítulo</h3>
       <form ng-submit="vm.addChapter()">
         <label for="description">Descripción:</label><br>
         <input type="text" id="description" name="description" ng-model="vm.newChapter.description"><br>
@@ -19,7 +19,7 @@
         <input type="number" id="totalCost" name="totalCost" value="0" ng-model="vm.newChapter.totalcost"><br>
         <label for="totalSale">Costo de venta:</label><br>
         <input type="number" id="totalSale" name="totalSale" value="0" ng-model="vm.newChapter.totalsale"><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Añadir">
       </form>
     </div>
 
@@ -27,21 +27,27 @@
       <table>
         <thead>
           <tr>
-            <th>Descripción</th>
-            <th>Coste total</th>
-            <th>Costo de venta</th>
+            <th><button ng-click="vm.sortChapters('description')">Descripción</button></th>
+            <th><button ng-click="vm.sortChapters('totalcost')">Coste total</button></th>
+            <th><button ng-click="vm.sortChapters('totalsale')">Costo de venta</button></th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="chapter in vm.chapters">
-            <td>{{ chapter.description }}</td>
-            <td>{{ chapter.totalcost }}</td>
-            <td>{{ chapter.totalsale }}</td>
+            <td ng-hide="chapter.editMode">{{ chapter.description }}</td>
+            <td ng-show="chapter.editMode"><input type="text" ng-model="chapter.description"></td>
+
+            <td ng-hide="chapter.editMode">{{ chapter.totalcost }}</td>
+            <td ng-show="chapter.editMode"><input type="number" ng-model="chapter.totalcost"></td>
+
+            <td ng-hide="chapter.editMode">{{ chapter.totalsale }}</td>
+            <td ng-show="chapter.editMode"><input type="number" ng-model="chapter.totalsale"></td>
             <td>
-              <button ng-click="vm.updateChapter(chapter); chapter.editMode = false">Guardar</button>
+              <button ng-show="!chapter.editMode" ng-click="chapter.editMode = true">Editar</button>
+              <button ng-show="chapter.editMode" ng-click="vm.updateChapter(chapter); chapter.editMode = false">Guardar</button>
               <button ng-click="vm.deleteChapter(chapter.id)">Eliminar</button>
-              <button ng-click="vm.viewBatches(chapter)">Ver Lotes</button>
+              <button ng-click="vm.viewBatches(chapter)">Ver Partidas</button>
             </td>
           </tr>
         </tbody>

@@ -8,9 +8,9 @@
 </head>
 <body>
   <div>
-    <h2>Lotes</h2>
+    <h2>Partidas</h2>
     <div>
-        <h3>Añadir nuevo lote</h3>
+        <h3>Añadir nueva partida</h3>
         <form ng-submit="vm.addBatch()">
           <label for="rank">Rango:</label><br>
           <input type="number" id="rank" name="rank" ng-model="vm.newBatch.rank"><br>
@@ -28,22 +28,21 @@
           <input type="number" id="unitarycost" name="unitarycost" ng-model="vm.newBatch.unitarycost"><br>
           <label for="totalsale">Venta total:</label><br>
           <input type="number" id="totalsale" name="totalsale" ng-model="vm.newBatch.totalsale"><br>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Añadir">
         </form>
       </div>
     <div class="table-responsive">
       <table>
         <thead>
           <tr>
-            <th>Rango</th>
-            <th>Descripción</th>
-            <th>Monto</th>
-            <th>Coste material</th>
-            <th>Coste laboral</th>
-            <th>Coste unitario</th>
-            <th>Coste total</th>
-            <th>Coste venta</th>
-            
+            <th><button ng-click="vm.sortBatches('rank')">Rango</button></th>
+            <th><button ng-click="vm.sortBatches('description')">Descripción</button></th>
+            <th><button ng-click="vm.sortBatches('mount')">Monto</button></th>
+            <th><button ng-click="vm.sortBatches('materialcost')">Coste material</button></th>
+            <th><button ng-click="vm.sortBatches('labourcost')">Coste laboral</button></th>
+            <th><button ng-click="vm.sortBatches('unitarycost')">Coste unitario</button></th>
+            <th><button ng-click="vm.sortBatches('totalcost')">Coste total</button></th>
+            <th><button ng-click="vm.sortBatches('totalsale')">Coste venta</button></th>
           </tr>
         </thead>
         <tbody>

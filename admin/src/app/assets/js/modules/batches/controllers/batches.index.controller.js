@@ -6,7 +6,9 @@ export default class BatchesController {
         this.budgetId = this.$rootScope.budgetId;
         this.chapterId = this.$rootScope.chapterId;
         this.batches = [];
-  
+
+
+        this.sortDirection = {};
         this.getBatches();
     }
 
@@ -68,5 +70,15 @@ export default class BatchesController {
     viewBatches(chapter) {
         this.chapterId = chapter.id;
         this.$state.go('batches', { chapterId: this.chapterId });
+    }
+
+    sortBatches(field) {
+        if (this.sortDirection[field] === 'ASC') {
+            this.batches.sort((a, b) => a[field] < b[field] ? 1 : -1);
+            this.sortDirection[field] = 'DESC';
+        } else {
+            this.batches.sort((a, b) => a[field] > b[field] ? 1 : -1);
+            this.sortDirection[field] = 'ASC';
+        }
     }
 }

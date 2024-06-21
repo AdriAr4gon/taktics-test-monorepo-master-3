@@ -1,5 +1,5 @@
 export default class BudgetController {
-  constructor($http, $state, $rootScope) {     // Asegúrate de inyectar $state aquí
+  constructor($http, $state, $rootScope) { 
     this.$http = $http;
     this.$state = $state;
     this.$rootScope = $rootScope;
@@ -14,20 +14,23 @@ export default class BudgetController {
       totalsale: 0,
       chapters: [],
     };
-
+    this.sortDirection = {};
     this.getBudgets();
   }
 
   getBudgets() {
     this.$http.get('http://localhost:3000/api/budgets').then(response => {
-      this.budgets = response.data;
+        this.budgets = response.data;
+        const promises = this.budgets.map(budget => 
+            this.calculateTotalBudgetCost(budget.id).then(totalCost => {
+                budget.totalcost = totalCost;
+            })
+        );
+        return Promise.all(promises);
     }).catch(error => {
-      console.error('Error fetching budgets:', error);
+        console.error('Error fetching budgets:', error);
     });
-    this.budgets.forEach(budget => {
-      console.log(budget.id);
-    });
-  }
+}
   
 
   addBudget() {
@@ -68,5 +71,48 @@ export default class BudgetController {
       console.error('Error deleting budget:', error);
     });
   }
+  filterBudgets() {
+    if (this.filterCriteria) {
+      this.budgets = this.budgets.filter(budget => 
+        budget.name.includes(this.filterCriteria) ||
+        budget.clientname.includes(this.filterCriteria)
+      );
+    } else {
+      this.getBudgets();
+    }
+  }
+  sortBudgets(field) {
+    if (this.sortDirection[field] === 'ASC') {
+      this.budgets.sort((a, b) => a[field] < b[field] ? 1 : -1);
+      this.sortDirection[field] = 'DESC';
+    } else {
+      this.budgets.sort((a, b) => a[field] > b[field] ? 1 : -1);
+      this.sortDirection[field] = 'ASC';
+    }
+  }
+
+  calculateTotalBudgetCost(budgetId) {
+    return this.$http.get(`http://localhost:3000/api/budgets/${budgetId}/chapters`).then(response => {
+        const chapters = response.data;
+        let totalCost = 0;
+        const promises = chapters.map(chapter => 
+            this.$http.get(`http://localhost:3000/api/chapters/${chapter.id}/batches`).then(response => {
+                const batches = response.data;
+                for (let batch of batches) {
+                    totalCost += batch.totalcost;
+                }
+            })
+        );
+        return Promise.all(promises).then(() => totalCost);
+    }).catch(error => {
+        console.error('Error fetching chapters:', error);
+    });
 }
+
+
+
+}
+
+
+
 
